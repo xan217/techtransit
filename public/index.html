@@ -12,7 +12,7 @@
     <div id="app">
         <div class="header">
             <div class="container-logo">
-                <img :src="logoSource" :alt="logoTitle" class="logo" width="200">
+                <img :src="logoSource" :alt="logoTitle" class="logo">
             </div>
             <div class="container-categorize">
                 <div class="categorize">
@@ -35,32 +35,42 @@
         </div> 
         <div class="content">
             <div class="container-search">
-                <div class="container-search">
-                    <input type="text" id="course-id" maxlength="50" v-model="courseName" v-on:change="updateCourses">
+                <div class="search container">
+                    <div class="ui fluid left icon input">
+                        <input type="text" id="course-id" maxlength="50" v-model="courseName" v-on:change="updateCourses" value=" " placeholder="Search all courses">
+                        <i class="search icon"></i>
+                    </div>
+                    
                 </div>
             </div>
-            <div class="courses-cards">
+            <div class="courses-cards ui cards">
                 <div class="card" v-for="item in items">
                     <input type="hidden" :name="item.id" :id="item.id" :value="item.id">
-                    <img :src="'https://www.mytablemesa.com' + item.imageUrl" alt="item.imageText" class="course-image">
+                    <img :src="'https://www.mytablemesa.com' + item.imageUrl" alt="item.imageText" class="course-image left floated ui image">
                     <div class="card-header">
-                        <div class="pill credits">{{ item.maximumCredits }}</div>
+                        <div class="pill credits">{{ item.maximumCredits }} CREDIT{{ item.maximumCredits > 1 ? "S" : "" }}</div>
                     </div>
                     <div class="card-body">
                         <div class="course-title">{{ item.name }}</div>
                         <div class="course-company">{{ item.provider.name }}</div>
                     </div>
                     <div class="card-footer">
-                        <div class="price">{{ item.price }}</div>
-                        <div class="rating">{{ item.rating }}</div>
+                        <div class="price">{{ item.price > 0 ? '$'+item.price : "FREE" }}</div>
+                        <div class="rating">
+                            <span v-for="n in parseInt(item.rating)"><i class="star icon"></i></span>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div id="finalContainer" v-observe-visibility="onScroll"></div>
         </div>
     </div>
 </body>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://unpkg.com/vue-observe-visibility/dist/vue-observe-visibility.min.js"></script>
 <script src="scripts/search.js"></script>
 
 <link rel="stylesheet" href="styles/style.css">
