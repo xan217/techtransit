@@ -10,10 +10,11 @@ app.use(express.static("public"));
 
 //ROUTES
 //Connection to the external server to retrieve the course list
-app.get('/courses', async (req, res) => {
+app.get('/courses/:name', async (req, res) => {
 
+    const name = (req.params.name == null ? "" : req.params.name);
     //ENDPOINT provided
-    const api_url = `https://test.mytablemesa.com/api/courses?orderBy=popularity+desc&expand=provider&name=`;
+    const api_url = `https://test.mytablemesa.com/api/courses?orderBy=popularity+desc&expand=provider&name=${name}`;
 
     //Request
     const fetch_response = await fetch(api_url);

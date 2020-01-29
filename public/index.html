@@ -8,48 +8,52 @@
     <title>TechTransit Development Test #1 By Renne Castellanos</title>
 </head>
 
-<body id="body">
-    <div class="header">
-        <div class="container-logo">
-            <img v-bind:src="logoSource" v-bind:alt="logoTitle" class="logo">
-        </div>
-        <div class="container-categorize">
-            <div class="categorize">
-                Show me courses for 
-                <select name="proffesion" id="proffesion" disabled>
-                    <option value="-1" selected disabled>-- All Professions --</option>
-                </select>
-                in
-                <select name="states" id="states" disabled>
-                    <option value="-1" selected disabled>-- All States --</option>
-                </select>
-                calsified as
-                <input type="text" name="classification" id="classification">
-                sorted by
-                <select name="interest" id="interest" disabled>
-                    <option value="-1" selected disabled>-- Popularity --</option>
-                </select>
+<body>
+    <div id="app">
+        <div class="header">
+            <div class="container-logo">
+                <img :src="logoSource" :alt="logoTitle" class="logo" width="200">
             </div>
-        </div>
-    </div> 
-    <div class="content">
-        <div class="container-search">
-            <input type="text" id="course-id" maxlength="50">
-        </div>
-        <div class="courses-cards">
-            <div class="card" v-for="item in items">
-                <input type="hidden" name="id" id="id" value="">
-                <img src="" alt="" class="course-image">
-                <div class="card-header">
-                    <div class="pill credits"></div>
+            <div class="container-categorize">
+                <div class="categorize">
+                    Show me courses for 
+                    <select name="proffesion" id="proffesion" disabled>
+                        <option value="-1" selected disabled>-- All Professions --</option>
+                    </select>
+                    in
+                    <select name="states" id="states" disabled>
+                        <option value="-1" selected disabled>-- All States --</option>
+                    </select>
+                    calsified as
+                    <input type="text" name="classification" id="classification" disabled>
+                    sorted by
+                    <select name="interest" id="interest" disabled>
+                        <option value="-1" selected disabled>-- Popularity --</option>
+                    </select>
                 </div>
-                <div class="card-body">
-                    <div class="course-title"></div>
-                    <div class="course-company"></div>
+            </div>
+        </div> 
+        <div class="content">
+            <div class="container-search">
+                <div class="container-search">
+                    <input type="text" id="course-id" maxlength="50" v-model="courseName" v-on:change="updateCourses">
                 </div>
-                <div class="card-footer">
-                    <div class="price"></div>
-                    <div class="rating"></div>
+            </div>
+            <div class="courses-cards">
+                <div class="card" v-for="item in items">
+                    <input type="hidden" :name="item.id" :id="item.id" :value="item.id">
+                    <img :src="'https://www.mytablemesa.com' + item.imageUrl" alt="item.imageText" class="course-image">
+                    <div class="card-header">
+                        <div class="pill credits">{{ item.maximumCredits }}</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="course-title">{{ item.name }}</div>
+                        <div class="course-company">{{ item.provider.name }}</div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="price">{{ item.price }}</div>
+                        <div class="rating">{{ item.rating }}</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -58,5 +62,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script src="scripts/search.js"></script>
+
+<link rel="stylesheet" href="styles/style.css">
 
 </html>
