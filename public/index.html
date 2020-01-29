@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TechTransit Development Test #1 By Renne Castellanos</title>
+</head>
+
+<body id="body">
+    <div class="header">
+        <div class="container-logo">
+            <img v-bind:src="logoSource" v-bind:alt="logoTitle" class="logo">
+        </div>
+        <div class="container-categorize">
+            <div class="categorize">
+                Show me courses for 
+                <select name="proffesion" id="proffesion" disabled>
+                    <option value="-1" selected disabled>-- All Professions --</option>
+                </select>
+                in
+                <select name="states" id="states" disabled>
+                    <option value="-1" selected disabled>-- All States --</option>
+                </select>
+                calsified as
+                <input type="text" name="classification" id="classification">
+                sorted by
+                <select name="interest" id="interest" disabled>
+                    <option value="-1" selected disabled>-- Popularity --</option>
+                </select>
+            </div>
+        </div>
+    </div> 
+    <div class="content">
+        <div class="container-search">
+            <input type="text" id="course-id" maxlength="50">
+        </div>
+        <div class="courses-cards">
+            <div class="card" v-for="item in items">
+                <input type="hidden" name="id" id="id" value="">
+                <img src="" alt="" class="course-image">
+                <div class="card-header">
+                    <div class="pill credits"></div>
+                </div>
+                <div class="card-body">
+                    <div class="course-title"></div>
+                    <div class="course-company"></div>
+                </div>
+                <div class="card-footer">
+                    <div class="price"></div>
+                    <div class="rating"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="scripts/search.js"></script>
+
+</html>
